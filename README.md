@@ -36,6 +36,5 @@
 
 
 
-## Layout : 
-<img width="949" alt="image" src="https://github.com/NandhiniMurugesh/Aerele_Task-Library_Management/assets/135119102/6af42dda-8fdd-40e7-a8b1-808ca92b8399">
+
 
