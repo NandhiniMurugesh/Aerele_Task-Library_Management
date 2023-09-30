@@ -1,0 +1,86 @@
+.libDashboard{
+  background-image: url('D:\project\Client\src\Librarian Home\libdash.jpeg');
+  height: 100vh;
+  color: azure;
+}
+.title{
+  color: rgb(216, 211, 211);
+  background-color: rgb(50, 50, 48);
+}
+table td ,table  {
+  border:3px solid whitesmoke;
+ 
+}
+
+.booktitle th{
+  border:3px solid whitesmoke;
+
+}
+.memlist{
+  background-image: url('D:\project\Client\src\Member List\memlist.jpg');
+  height: 100vh;
+  opacity: 0.8;
+}
+
+
+table{
+  background-color: rgb(9, 244, 166);
+  color: black;
+}
+tr:nth-child(even) {
+  background-color: rgb(79, 88, 183);
+  color: aliceblue;
+ }
+ .mainRegistration{
+ background-image: url('D:\project\Client\src\Addmember\addmemimg.jpg');
+ background-repeat: no-repeat;
+ background-size: cover;
+ height:200vh;
+
+ }
+ .userRegistration{
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease-in-out;
+ }
+ .userRegistration:hover{
+  box-shadow: 20px 20px 20px 20px rgba(8, 8, 8, 0.3);
+  background-color: rgb(252, 195, 175);
+ }
+ .bookimage{
+  width: 100px;
+}
+.bookname{
+  width: 200px;
+}
+.description{
+  width: 250px;
+}
+.price{
+  width: 70px;
+}
+.rating{
+  width: 150px;
+}
+.carddetail{
+  width: 250px;
+}
+.memberDiv{
+  background-image: url('D:\project\Client\src\Member List\member.jpg');
+}
+.booklist{
+  background-image: url('D:\project\Client\src\Booklist\booklist.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.table-row:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease; 
+
+}
+.carddetail:hover{
+  transform: scale(1.05);
+  transition: transform 0.3s ease; 
+  background-color: rgb(61, 72, 69);
+  color: aliceblue;
+}
