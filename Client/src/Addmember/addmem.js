@@ -60,7 +60,7 @@ export function Addmember(){
                 }
                 else if(userdet.data.status==="success"){
                     alert("data inserted")
-                    window.location.href="/libdash/:id"
+                    window.location.href="/"
                 }
             })
         }

@@ -230,209 +230,117 @@ connect.post('/delete', (request, response) => {
         }
     })
 })
-// get the book price from boodetail table
-// connect.post('/outdebt',(request,response)=>{
-//     // let {bookid} = request.params
-//     // let {dueday} = request.params
-//     let fee='select price from bookdetail where bookid=?'
-//     let totalprice='fee*dueday'
-//     let outdebt,id='select outdebt,id from transactiondetail where id=?'
-//     databaseconnection.query(fee,totalprice,outdebt,id[bookid,dueday,outdebt,id],(error,result)=>{
-//         if(error) {
-//             response.send(error)
-//             console.log(error)
-//         }
-//         else{
-//             response.send(result)
 
-//         }
-
-//     })
-
-// })
-
-// insert the data in transaction table
-
-// connect.post('/addtrans', (request, response) => {
-//     let { transid, id, bookid, issuedate, duedate, dueday, fineamnt, status } = request.body
-//     // let dueDay = request.body.dueday
-//     // let bookId = request.body.bookid
-//     // let memId = request.body.id
-
-//     var totalPrice;
-
-//     let priceSql = 'select price from bookdetail where bookid=?'
-//     databaseconnection.query(priceSql[bookid], (error, result) => {
-//         if (error) {
-//             response.send(error)
-//             console.log(error)
-//         }
-//         else {
-//             console.log(result)
-//             // totalPrice = result * dueDay
-//             // response.send(result)
-
-//         }
-
-//     })
-
-
-
-//     let debtSql = 'select outdebt, id from transactiondetail where id = ?'
-
-//     databaseconnection.query(debtSql[memId], (error, result) => {
-//         if (error) {
-//             response.send(error)
-//             console.log(error)
-//         }
-//         else {
-//             let debt = result[0].debt
-//             let mem = result[1].mem
-
-//             let totalDebt = totalPrice + debt
-
-
-
-//             if (debt == 0 && memId == 0) {
-//                 let sql = 'insert into transactiondetail(transid,id,bookid,issuedate,duedate,fineamnt,status) values(?,?,?,?,?,?,?)'
-//                 databaseconnection.query(sql, [transid, id, bookid, issuedate, duedate, fineamnt, status], (error, result) => {
-//                     if (error) {
-//                         response.send({ "status": "error" })
-//                         console.log(error)
-//                     }
-//                     else {
-//                         response.send({ "status": "success" })
-//                         console.log("ok")
-//                     }
-//                 })
-//             } else if (debt >= 0 && memId != 0) {
-
-//                 if (totalDebt>500) {
-                    
-//                 } else if (totalDebt>0 && totalDebt<500){
-//                     //update
-//                 }
-
-
-
-//             }
-
-
-
-
-
-//         }
-
-//     })
-
-
-
-// })
 // issue book details
 // issues   
 connect.post('/issuebook', (request, response) => {
-    let {transid, bookid, id, issuedate,returndate,duedate,fineamnt,status,outdebt, dueday } = request.body
+    let { transid, bookid, id, issuedate, returndate, duedate, fineamnt, status, outdebt, dueday } = request.body
     let bookPrice
     var outDebt
     var memid
     var totalPrice
-  
-  
+
+
     let priceSql = 'select price from bookdetail where bookid = ?'
     databaseconnection.query(priceSql, [bookid], (error, result) => {
-      if (error) {
-        response.send({ "status": "error" })
-        console.log(error)
-      }
-      else {
-        bookPrice = result[0].price
-        totalPrice = bookPrice * dueday
-        console.log(bookPrice);
-      }
-    })
-  
-    let debtSql = 'select outdebt, id from transactiondetail where id = ?'
-    databaseconnection.query(debtSql, [outdebt,id], (error, result) => {
-  
-      console.log('Entering debtSql');
-      if (error) {
-        response.send({ "status": "error" })
-        console.log(error)
-      } else {
-        console.log('Entering else');
-        console.log(result);
-        if (result.length == 0) {
-          console.log('Entering if');
-
-          let sql = 'insert into transactiondetail(transid,id,bookid,issuedate,duedate,returndate,fineamnt,status,outdebt,dueday) values(?,?,?,?,?,?,?,?,?,?)'
-          databaseconnection.query(sql, [transid,id,bookid, issuedate,duedate,returndate,fineamnt,status,outdebt, dueday, totalPrice], (error, result) => {
-            if (error) {
-              response.send({ "status": "error" })
-              console.log(error)
-            }
-            else {
-              response.send({ "status": "success" })
-            }
-          })
-        } else {
-          
-        console.log(result);
-        outDebt = result[0].outdebt
-        console.log(outDebt);
-        console.log(totalPrice);
-  
-  
-          var totalDebt = outDebt + totalPrice
-  
-  
-          console.log(totalDebt);
-          if (totalDebt > 500) {
-           response.send({'status':'limit reached'});
-          } else if (totalDebt > 0 && totalDebt < 500){
-            console.log('last else if');
-  
-            let updateSql = 'update transactiondetails set outdebt = ? where id = ?'
-            console.log(updateSql);
-            databaseconnection.query(updateSql, [totalDebt,id], (error, result) => {
-              if (error) {
-                response.send({ "status": "error" })
-                console.log(error)
-              }
-              else {
-                
-                response.send({ "status": "success" })
-              }
-            })
-          }
-  
-  
-        }
-      }
-    })
-  
-//   get data from transaction table
-connect.get('/transdet', (request, response) => {
-    let sql = 'select * from project.transactiondetail'
-    databaseconnection.query(sql,(error, result) => {
         if (error) {
-            response.send(error)
+            response.send({ "status": "error" })
             console.log(error)
         }
         else {
-            response.send(result)
-
+            bookPrice = result[0].price
+            totalPrice = bookPrice * dueday
+            console.log(bookPrice);
         }
-
     })
+
+    let debtSql = 'select outdebt, id from transactiondetail where id = ?'
+    databaseconnection.query(debtSql, [id], (error, result) => {
+
+
+        if (error) {
+            response.send({ "status": "error" })
+            console.log(error)
+        } else {
+
+            console.log(result);
+            if (result.length == 0) {
+
+                if (totalPrice > 500) {
+                    response.send({ 'status': 'limit reached' });
+                } else {
+                    let sql = 'insert into transactiondetail(transid,id,bookid,issuedate,duedate,returndate,fineamnt,status,outdebt,dueday) values(?,?,?,?,?,?,?,?,?,?)'
+                    databaseconnection.query(sql, [transid, id, bookid, issuedate, duedate, returndate, fineamnt, status, totalPrice, dueday], (error, result) => {
+                        if (error) {
+                            response.send({ "status": "error" })
+                            console.log(error)
+                        }
+                        else {
+                            response.send({ "status": "success" })
+                        }
+                    })
+                }
+
+
+            } else {
+
+                console.log(result);
+                outDebt = result[0].outdebt
+                console.log(outDebt);
+                console.log(totalPrice);
+
+
+                var totalDebt = outDebt + totalPrice
+
+
+                console.log(totalDebt);
+                if (totalDebt > 500) {
+                    response.send({ 'status': 'limit reached' });
+                } else if (totalDebt > 0 && totalDebt < 500) {
+                    console.log('last else if');
+
+                    let updateSql = 'update transactiondetail set outdebt = ? where id = ?'
+                    console.log(updateSql);
+                    databaseconnection.query(updateSql, [totalDebt, id], (error, result) => {
+                        if (error) {
+                            response.send({ "status": "error" })
+                            console.log(error)
+                        }
+                        else {
+
+                            response.send({ "status": "success" })
+                        }
+                    })
+                }
+
+
+            }
+        }
+    })
+
+    //   get data from transaction table
+    connect.get('/transdet', (request, response) => {
+        let sql = 'select * from project.transactiondetail'
+        databaseconnection.query(sql, (error, result) => {
+            if (error) {
+                response.send(error)
+                console.log(error)
+            }
+            else {
+                response.send(result)
+
+            }
+
+        })
+    })
+
+
+
+
+
 })
-  
-  
-  
-  
-  
-  })
-  
-  // Single trans detail Review 
+
+// Single trans detail Review 
 connect.get('/transdet/:transid', (request, response) => {
     let { transid } = request.params
     let sql = 'select * from transactiondetail where transid=?'
@@ -451,9 +359,9 @@ connect.get('/transdet/:transid', (request, response) => {
 // update book detail
 connect.put('/transupdate/:transid', (request, response) => {
     let { transid } = request.params
-    let { returndate ,outdebt,fineamount} = request.body
+    let { returndate, outdebt, fineamount } = request.body
     let sql = 'update transactiondetail set returndate=?,outdebt=?,fineamnt=? where transid=?'
-    databaseconnection.query(sql, [returndate,outdebt,fineamount,transid], (error, result) => {
+    databaseconnection.query(sql, [returndate, outdebt, fineamount, transid], (error, result) => {
         if (error) {
             response.send({ "status": "not_updated" })
             console.log(error)
@@ -483,9 +391,9 @@ connect.post('/delete', (request, response) => {
 
 // inser data into transaction table
 connect.post('/addtrans', (request, response) => {
-    let { transid,id,bookid,issuedate,duedate,returndate,fineamnt,status,outdebt,dueday } = request.body
+    let { transid, id, bookid, issuedate, duedate, returndate, fineamnt, status, outdebt, dueday } = request.body
     let sql = 'insert into transactiondetail(transid,id,bookid,issuedate,duedate,returndate,fineamnt,status,outdebt,dueday) values(?,?,?,?,?,?,?,?,?,?)'
-    databaseconnection.query(sql, [transid,id,bookid,issuedate,duedate,returndate,fineamnt,status,outdebt,dueday], (error, result) => {
+    databaseconnection.query(sql, [transid, id, bookid, issuedate, duedate, returndate, fineamnt, status, outdebt, dueday], (error, result) => {
         if (error) {
             response.send({ "status": "error" })
             console.log(error)

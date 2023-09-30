@@ -14,9 +14,10 @@ export function Transupdate(){
     const[status,setStatus]=useState('')
     const[dueday,setDueday]=useState('')
     const[outdebt,setOutdebt]=useState('')
-   
+    
+    
     useEffect(()=>{
-        fetch("http://localhost:5040//"+id)
+        fetch("http://localhost:5040//transdet/"+transid)
         .then(res=>res.json())
         .then((data)=>{
             console.log(data)
@@ -97,7 +98,7 @@ export function Transupdate(){
         
        
         else{
-            axios.put("http://localhost:5040/transupdate/"+transid,key)
+            axios.put("http://localhost:5040//transupdate/"+transid,key)
             .then((upddet)=>{
                 if(upddet.data.status==='not_updated'){
                     alert("data not updated")

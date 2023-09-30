@@ -102,7 +102,7 @@ export function Bookupdate(){
     }
     return (
         <>
-             <div className="alohomoraDashboard">
+             <div className="projDashboard">
         <div className="text-center title">
             <h3>AERELE LIBRARY</h3>
             <h5>The World of Bibliophiles!</h5>

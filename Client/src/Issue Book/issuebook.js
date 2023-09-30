@@ -6,22 +6,18 @@ export function Issuebook(){
         event.preventDefault()
         var id= document.getElementById("id").value
         var bookid=document.getElementById("bookid").value
-        var transid=document.getElementById("transid").value
         var issuedate=document.getElementById("issuedate").value
         var duedate=document.getElementById("duedate").value
         var dueday=document.getElementById("dueday").value
-        var outdebt=document.getElementById("outdebt").value
         var fineamnt=document.getElementById("fineamnt").value
         var status=document.getElementById("status").value
 
         var key={
             id:id,
             bookid:bookid,
-            transid:transid,
             issuedate:issuedate,
             duedate:duedate,
             dueday:dueday,
-           outdebt:outdebt,
             fineamnt:fineamnt,
             status:status
         }
@@ -31,9 +27,7 @@ export function Issuebook(){
         else if(bookid===""){
             alert("Enter the Book Id")
         }
-        else if(transid===""){
-            alert("Enter the Book Id")
-        }
+       
         else if(issuedate===""){
             alert("Select the Issue date")
         }
@@ -85,7 +79,6 @@ export function Issuebook(){
                     
                         <input type="text" className="form-control" placeholder="Member Id" id="id" /><br/>
                         <input type="text" className="form-control" placeholder="Book Id" id="bookid"  /><br/>
-                        <input type="text" className="form-control" placeholder="Trans Id" id="transid" /><br/>
                         <label>Issue date</label>
                         <input type="date" className="form-control" placeholder="Issue date" id="issuedate" /><br/>
                         <label>Due Date</label>
@@ -96,7 +89,6 @@ export function Issuebook(){
                       
                         <input type="text" className="form-control" placeholder="Due day" id="dueday" /><br/>
                         <input type="text" className="form-control" placeholder="Fine Amount" id="fineamnt" /><br/>
-                        <input type="text" className="form-control" placeholder="Outdebt" id="outdebt" /><br/>
                         
                         <select className="form-control" id="status">
                             <option >Select the status</option>

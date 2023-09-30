@@ -24,7 +24,7 @@ table td ,table  {
 
 
 table{
-  background-color: rgb(9, 244, 166);
+  
   color: black;
 }
 tr:nth-child(even) {
@@ -84,3 +84,37 @@ tr:nth-child(even) {
   background-color: rgb(61, 72, 69);
   color: aliceblue;
 }
+/* Styles for the table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+/* Hover effect for table rows */
+.table tbody tr:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+.memUpd{
+  box-shadow: 20px 20px 20px 20px rgba(8, 8, 8, 0.3);
+  background-color: rgb(252, 195, 175);
+ }
+.projDashboard{
+  background-image: url();
+}
+
+
+
